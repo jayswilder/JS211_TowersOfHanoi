@@ -1,5 +1,24 @@
 # JS211_Towers of Hanoi[![CircleCI](https://circleci.com/gh/AustinCodingAcademy/javascript-workbook/tree/gh-pages.svg?style=svg)](https://circleci.com/gh/AustinCodingAcademy/javascript-workbook/tree/gh-pages)
 
+
+
+=====================================================================================================
+================================== Jay Wilder - Code Plan ===========================================
+=====================================================================================================
+
+1. Create an object of arrays for each tower to assign blocks to. 
+2. Number pieces from 1 to 4 (1 being smallest).
+3. Create a function to pop a piece from the array to push it to the next array.
+4. Create a function that checks if the blocks are in order of size so that the move is possible.
+5. Create a way to check that the user has put in the correct input.
+6. Create a function to check for a win and notify the player.
+
+=====================================================================================================
+================================== Jay Wilder - Code Plan ===========================================
+=====================================================================================================
+
+
+
 ![](http://en.gravatar.com/userimage/107370100/a08594145564536138dfaaf072c7b241.png)
 
 # Austin Coding Academy
@@ -165,3 +184,8 @@ Simply run `npm run lint`
 
 1. Run `npm start`
 1. To break out of the server, press `ctrl` + `c`
+
+
+
+
+
