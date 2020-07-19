@@ -4,6 +4,7 @@
 const assert = require('assert');
 // brings in the readline module to access the command line
 const readline = require('readline');
+const { start } = require('repl');
 // use the readline module to print out to the command line
 const rl = readline.createInterface({
   input: process.stdin,
@@ -39,10 +40,48 @@ const movePiece = (startStack, endStack) => {
 
 }
 
+// extra code issue found:
+// check to make sure an input is valid.  i.e. startStack can only be 'a', 'b', or 'c'
+const validInput = (startStack, endStack) => {
+  if(startStack == 'a' && (endStack === 'b' || endStack == 'c')) {
+    return true
+  }
+    else if (startStack == 'b' && (endStack == 'a' || endStack == 'c')) {
+    return true 
+    }
+    else if (startStack == 'c' && (endStack == 'a' || endStack == 'b')) {
+      return true 
+    }
+    else {
+      console.log(" ");
+      console.log("======= Invalid  Input! =======");
+      console.log("==== Input 'a', 'b' or 'c' ====");
+      console.log(" ");
+      return false;
+  }
+  
+}
+
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+const isLegal = (startStack, endStack) => {
   // Your code here
 // i.e. Should higher number be able to stack on top of lower number
+if (validInput(startStack, endStack)) {
+  
+  let startMove = stacks[startStack][stacks[startStack].length - 1]
+  
+  let endMove = stacks[endStack][stacks[endStack].length - 1]
+  if (startMove < endMove || stacks[endStack].length == 0) {
+    return true;
+  } 
+  else {
+    console.log(" ");
+    console.log("     =============== Illegal  Move! ===============");
+    console.log("==== Cannot Place Larger Number onto Smaller Number ====");
+    console.log(" ");
+    return false
+  }
+  }
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
@@ -71,8 +110,12 @@ const towersOfHanoi = (startStack, endStack) => {
   // if legal move piece else get report error and get prompt
   // if is isLegal() then move piece(startStack, endStack)
   // if move piece check for win
-  checkForWin();
+  if (isLegal(startStack, endStack)) {
+    movePiece(startStack, endStack);
+    checkForWin();
+  }
 }
+
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
@@ -123,7 +166,7 @@ if (typeof describe === 'function') {
   });
   describe('#checkForWin()', () => {
     it('should detect a win', () => {
-      stacks = { a: [], b: [4, 3, 2, 1], c: [] };
+      stacks = { a: [], b: [], c: [4, 3, 2, 1] };
       assert.equal(checkForWin(), true);
       stacks = { a: [1], b: [4, 3, 2], c: [] };
       assert.equal(checkForWin(), false);
